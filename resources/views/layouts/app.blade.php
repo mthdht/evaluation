@@ -13,67 +13,53 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c1d0ab37d6.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+<body class="bg-gray-100 text-gray-700">
+    <div id="app" class="h-screen flex flex-col relative">
+        <header class="bg-white border-t-2 border-green-500 shadow z-10 px-4">
+            <div class="container mx-auto md:flex justify-between relative text-center">
+                <button class="absolute top-0 mt-3 left-0 ml-2 md:hidden hover-effect" @click="open">
+                    <i class="fas fa-bars fa-lg"></i>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                <a href="/" class="link hover:bg-green-500 hover:text-white text-2xl">Evaluation</a>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                <nav class="hidden md:flex">
+                    @guest
+                    <a href="{{ route('login') }}" class="link hover:bg-green-500 hover:text-white ">Connexion</a>
+                    <a href="{{ route('register') }}" class="link hover:bg-green-500 hover:text-white ">Inscription</a>
+                    @else
+                    <div class="group relative flex items-center">
+                        <a href="{{ route('dashboard') }}" class="link text-green-500 hover-effect hover:text-white hover:text-green-600"><i class="fas fa-user"></i></a>
+                        <div class="dropdown flex flex-col absolute right-0 mt-24 w-40 hidden group-hover:block bg-white shadow text-left">
+                            <a href="{{ route('dashboard') }}" class="link hover:bg-green-500 hover:text-white block">Dashboard</a>
+                            <a href="{{ route('logout') }}" class="link hover:bg-green-500 hover:text-white block" @click.prevent="submit">Se déconnecter</a>
+                            <form action="{{ route('logout') }}" method="post" class="hidden" ref="logout">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                    @endguest
+                </nav>
             </div>
-        </nav>
+        </header>
 
-        <main class="py-4">
+        <navbar @close="close"
+                :class="openNav ? 'block' : 'hidden'"
+                active="{{ $active ?? '' }}"
+                :auth="{{ Auth::check() ? 'true' : 'false' }}"
+                csrf='{{ csrf_field() }}'></navbar>
+
+        <main class="flex flex-col md:flex-row flex-grow">
+            @auth
+            <sidebar active="{{ $active }}"></sidebar>
+            @endauth
+            <section class="content flex-grow p-4">
             @yield('content')
+            </section>
         </main>
     </div>
 </body>

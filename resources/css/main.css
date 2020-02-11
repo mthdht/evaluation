@@ -2,4 +2,21 @@
 
 @tailwind components;
 
+.link {
+    @apply p-2 inline-flex justify-center items-center;
+}
+
+.active {
+    @apply border-b-4 border-green-500;
+}
+
+.hover-effect:hover {
+    @apply transition text-gray-800 duration-700 transform scale-110;
+}
+
+@media (min-width: 768px) {
+    .active {
+        @apply border-l-4 border-b-0;
+    }
+}
 @tailwind utilities;
