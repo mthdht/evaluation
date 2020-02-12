@@ -37595,42 +37595,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "sidebar bg-gray-200 w-full md:w-16" }, [
-    _c("div", { staticClass: "flex md:flex-col text-gray-600" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "flex-grow p-4 hover:text-gray-700 flex justify-center hover-effect",
-          class: _vm.active == "dashboard" ? "active" : "",
-          attrs: { href: "", title: "Dashboard" }
-        },
-        [_c("i", { staticClass: "far fa-compass fa-2x" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass:
-            "flex-grow p-4 hover:text-gray-700 flex justify-center hover-effect",
-          class: _vm.active == "eval" ? "active" : "",
-          attrs: { href: "", title: "Evaluations" }
-        },
-        [_c("i", { staticClass: "fas fa-award fa-2x" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass:
-            "flex-grow p-4 hover:text-gray-700 flex justify-center hover-effect",
-          class: _vm.active == "project" ? "active" : "",
-          attrs: { href: "", title: "Projets" }
-        },
-        [_c("i", { staticClass: "far fa-window-restore fa-2x" })]
-      )
-    ])
-  ])
+  return _c(
+    "section",
+    { staticClass: "sidebar bg-gray-200 w-full md:w-16 shadow" },
+    [
+      _c("div", { staticClass: "flex md:flex-col text-gray-600" }, [
+        _c(
+          "a",
+          {
+            staticClass:
+              "flex-grow p-4 hover:text-gray-700 flex justify-center hover-effect",
+            class: _vm.active == "dashboard" ? "active" : "",
+            attrs: { href: "", title: "Dashboard" }
+          },
+          [_c("i", { staticClass: "far fa-compass fa-2x" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "flex-grow p-4 hover:text-gray-700 flex justify-center hover-effect",
+            class: _vm.active == "eval" ? "active" : "",
+            attrs: { href: "", title: "Evaluations" }
+          },
+          [_c("i", { staticClass: "fas fa-award fa-2x" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "flex-grow p-4 hover:text-gray-700 flex justify-center hover-effect",
+            class: _vm.active == "project" ? "active" : "",
+            attrs: { href: "", title: "Projets" }
+          },
+          [_c("i", { staticClass: "far fa-window-restore fa-2x" })]
+        )
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
